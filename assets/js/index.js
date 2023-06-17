@@ -1,9 +1,11 @@
+// require('dotenv').config();
+
 
 function success(pos){
   const lat = pos.coords.latitude;   //緯度を取得して定数latに代入
   const lon = pos.coords.longitude;  //経度を取得して定数lonに代入
 
-  const key = '601fe0278b2b16f811a9184a1be872d5';
+  const key = import.meta.env.VITE_API_KEY_OPEN_WEATHER_MAP;
   const lang = 'ja';
   fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + key)  
   .then(function(resp) { return resp.json() }) // Convert data to json
