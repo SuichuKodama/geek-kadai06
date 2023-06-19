@@ -10,8 +10,16 @@ function success(pos){
   fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + key)  
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
-    // console.log(data);
     drawWeather(data);
+  })
+  .catch(function() {
+    // catch any errors
+  });
+
+  fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + key + '&lang=' + lang)  
+  .then(function(resp) { return resp.json() }) // Convert data to json
+  .then(function(data) {
+    console.log(data);
   })
   .catch(function() {
     // catch any errors
@@ -42,21 +50,17 @@ navigator.geolocation.getCurrentPosition(success,fail);
 // }
 
 function threeWeather() {
-  const key = '601fe0278b2b16f811a9184a1be872d5';
+  const key = import.meta.env.VITE_API_KEY_OPEN_WEATHER_MAP;
   const lang = 'ja';
-  fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + key + '&lang=' + lang)  
-  .then(function(resp) { return resp.json() }) // Convert data to json
-  .then(function(data) {
-    console.log(data);
-  })
-  .catch(function() {
-    // catch any errors
-  });
+
 }
 
 window.onload = function() {
   threeWeather();
 }
+
+
+// マップで日付をkeyにして
 
 
 function drawWeather( d ) {
